@@ -1,0 +1,5 @@
+{
+  "comment": "EcoVault Google Analytics 4 Configuration",
+  "instructions": "Create a GA4 property in Google Analytics and paste your Measurement ID below (starts with G-)",
+  "measurementId": ""
+}
