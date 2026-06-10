@@ -1,5 +1,0 @@
-{
-  "comment": "EcoVault Stripe Configuration",
-  "instructions": "Get your publishable key from https://dashboard.stripe.com/test/apikeys (test mode) or https://dashboard.stripe.com/apikeys (live mode). The key starts with pk_test_ or pk_live_.",
-  "publishableKey": "pk_test_51OcExamplePublishableKeyHere"
-}
