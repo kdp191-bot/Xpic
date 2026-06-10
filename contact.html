@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact EcoVault — Get in touch with our team.">
+  <title>Contact Us — EcoVault</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;">
+      </a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button class="cart-icon" onclick="window.location.href='cart.html'" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Contact Page -->
+  <section class="contact-page">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <h1>Get in Touch</h1>
+          <p>Have a question about a product, your order, or sustainability? We'd love to hear from you. Our team typically responds within 24 hours.</p>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div>
+              <h4>Email</h4>
+              <p>hello@ecovault.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <p>+1 (555) 123-4567</p>
+              <p style="font-size:0.8rem;">Mon–Fri, 9am–5pm EST</p>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div>
+              <h4>Location</h4>
+              <p>EcoVault HQ<br>
+              742 Evergreen Terrace<br>
+              Portland, OR 97201</p>
+            </div>
+          </div>
+          
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🕐</div>
+            <div>
+              <h4>Response Time</h4>
+              <p>We aim to reply within 24 hours on business days. For urgent order inquiries, please include your order ID.</p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="form-section">
+            <h3>Send Us a Message</h3>
+            <form onsubmit="event.preventDefault(); Cart.showNotification('Message sent! We\'ll get back to you soon.'); this.reset();">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="contact-name">Full Name</label>
+                  <input type="text" id="contact-name" required placeholder="Your name">
+                </div>
+                <div class="form-group">
+                  <label for="contact-email">Email</label>
+                  <input type="email" id="contact-email" required placeholder="your@email.com">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="contact-subject">Subject</label>
+                <select id="contact-subject">
+                  <option value="general">General Inquiry</option>
+                  <option value="order">Order Question</option>
+                  <option value="product">Product Suggestion</option>
+                  <option value="wholesale">Wholesale / Partnership</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" required placeholder="How can we help you?" rows="5"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>Stay in the Loop</h2>
+      <p>Get 10% off your first order and be the first to know about new products and sustainability tips.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); Cart.showNotification('Thanks for subscribing! 🎉'); this.reset();">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;filter:brightness(0) invert(1);">
+          </div>
+          <p>Curated sustainable home and lifestyle products. Better for you, better for the planet.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=kitchen">Kitchen</a></li>
+            <li><a href="products.html?category=bamboo">Bamboo</a></li>
+            <li><a href="products.html?category=compostable">Compostable</a></li>
+            <li><a href="products.html?category=cleaning">Cleaning</a></li>
+            <li><a href="products.html?category=lifestyle">Lifestyle</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="about.html#sustainability">Sustainability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Help Center</a></li>
+            <li><a href="contact.html">Shipping Info</a></li>
+            <li><a href="contact.html">Returns</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 EcoVault. All rights reserved.</span>
+        <span>🌱 Every purchase plants a seed for a better tomorrow.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
