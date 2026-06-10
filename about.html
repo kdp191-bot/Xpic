@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About EcoVault — Our mission for sustainable living.">
+  <title>About Us — EcoVault</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;">
+      </a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button class="cart-icon" onclick="window.location.href='cart.html'" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- About Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <h1>Our Mission</h1>
+      <p>Making sustainable living beautiful, accessible, and affordable. We believe that small daily choices — multiplied by millions of conscious consumers — create a healthier planet for everyone.</p>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-content">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <h2>The EcoVault Story</h2>
+          <p>EcoVault was born from a simple observation: finding genuinely sustainable home products that are also stylish and affordable is surprisingly hard. Too many "eco-friendly" products are either overpriced, underwhelming, or both.</p>
+          <p>We set out to change that. Our team spends hours researching suppliers, vetting materials, and testing products so you don't have to. Every item in our collection meets three criteria: it's genuinely sustainable, it's beautifully designed, and it's fairly priced.</p>
+          <p>We operate on a dropshipping model — no inventory, no warehouse, no retail markup. This lets us offer premium sustainable goods at prices that make going green an easy choice, not a luxury.</p>
+        </div>
+        <div class="about-image-placeholder">
+          🌿
+        </div>
+      </div>
+
+      <h2 class="section-title" id="sustainability">Our Core Values</h2>
+      <p class="section-subtitle">The principles that guide every product we choose and every decision we make.</p>
+      
+      <div class="about-values">
+        <div class="about-value-card">
+          <div class="value-icon">🔍</div>
+          <h3>Radical Transparency</h3>
+          <p>We disclose materials, sourcing, and certifications for every product. No vague "eco-friendly" claims — just real data you can trust.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="value-icon">♻️</div>
+          <h3>Circular by Design</h3>
+          <p>We prioritize products that are reusable, compostable, or infinitely recyclable. Waste isn't waste until you throw it away — so we help you avoid that step.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="value-icon">🌍</div>
+          <h3>Planet First</h3>
+          <p>Every product we carry must demonstrably reduce environmental impact compared to its conventional counterpart. If it's not better for the planet, it doesn't belong here.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="value-icon">🎨</div>
+          <h3>Design That Lasts</h3>
+          <p>Sustainability means building things that people want to keep. We choose timeless design and durable materials over trends and disposability.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Fair to All</h3>
+          <p>We partner with suppliers who pay fair wages and maintain safe working conditions. Sustainability must include social justice.</p>
+        </div>
+        <div class="about-value-card">
+          <div class="value-icon">📦</div>
+          <h3>Zero-Waste Operations</h3>
+          <p>Our dropshipping model minimizes shipping emissions by sending products directly from suppliers. All packaging is recycled, recyclable, or compostable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="container">
+      <h2>Join the Movement</h2>
+      <p>Subscribe for sustainability tips, new product alerts, and exclusive discounts.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); Cart.showNotification('Thanks for subscribing! 🎉'); this.reset();">
+        <input type="email" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;filter:brightness(0) invert(1);">
+          </div>
+          <p>Curated sustainable home and lifestyle products. Better for you, better for the planet.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=kitchen">Kitchen</a></li>
+            <li><a href="products.html?category=bamboo">Bamboo</a></li>
+            <li><a href="products.html?category=compostable">Compostable</a></li>
+            <li><a href="products.html?category=cleaning">Cleaning</a></li>
+            <li><a href="products.html?category=lifestyle">Lifestyle</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="about.html#sustainability">Sustainability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Help Center</a></li>
+            <li><a href="contact.html">Shipping Info</a></li>
+            <li><a href="contact.html">Returns</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 EcoVault. All rights reserved.</span>
+        <span>🌱 Every purchase plants a seed for a better tomorrow.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

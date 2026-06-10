@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout">
+  <title>Checkout — EcoVault</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="favicon.png">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;">
+      </a>
+      <button class="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Shop</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <button class="cart-icon" onclick="window.location.href='cart.html'" title="Shopping Cart">
+          🛒
+          <span class="cart-badge">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Checkout Page -->
+  <section class="checkout-page">
+    <div class="container">
+      <h1>Checkout</h1>
+      <div id="checkout-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <img src="assets/images/logo.png" alt="EcoVault" style="height:32px;width:auto;filter:brightness(0) invert(1);">
+          </div>
+          <p>Curated sustainable home and lifestyle products. Better for you, better for the planet.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <ul class="footer-links">
+            <li><a href="products.html?category=kitchen">Kitchen</a></li>
+            <li><a href="products.html?category=bamboo">Bamboo</a></li>
+            <li><a href="products.html?category=compostable">Compostable</a></li>
+            <li><a href="products.html?category=cleaning">Cleaning</a></li>
+            <li><a href="products.html?category=lifestyle">Lifestyle</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Learn</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="about.html#sustainability">Sustainability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html">Help Center</a></li>
+            <li><a href="contact.html">Shipping Info</a></li>
+            <li><a href="contact.html">Returns</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2025 EcoVault. All rights reserved.</span>
+        <span>🌱 Every purchase plants a seed for a better tomorrow.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/orders.js"></script>
+  <script src="js/stripe-checkout.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = Cart.getDetailedCart();
+      const container = document.getElementById('checkout-container');
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <h2>Your cart is empty</h2>
+            <p>Add some products before checking out.</p>
+            <a href="products.html" class="btn btn-primary">Shop Now</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = Cart.getSubtotal();
+      const shipping = subtotal >= 50 ? 0 : 5.99;
+      const total = subtotal + shipping;
+
+      container.innerHTML = `
+        <div class="checkout-layout">
+          <div>
+            <div class="form-section">
+              <h3>Shipping Information</h3>
+              <form id="checkout-form" onsubmit="handleCheckout(event)">
+                <div class="form-group">
+                  <label for="fullname">Full Name</label>
+                  <input type="text" id="fullname" required placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" required placeholder="jane@example.com">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input type="tel" id="phone" placeholder="+1 (555) 123-4567">
+                </div>
+                <div class="form-group">
+                  <label for="address">Street Address</label>
+                  <input type="text" id="address" required placeholder="123 Green Street">
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" id="city" required placeholder="Portland">
+                  </div>
+                  <div class="form-group">
+                    <label for="state">State / Province</label>
+                    <input type="text" id="state" required placeholder="OR">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="zip">ZIP / Postal Code</label>
+                    <input type="text" id="zip" required placeholder="97201">
+                  </div>
+                  <div class="form-group">
+                    <label for="country">Country</label>
+                    <select id="country" required>
+                      <option value="">Select country</option>
+                      <option value="US">United States</option>
+                      <option value="UK">United Kingdom</option>
+                      <option value="CA">Canada</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="notes">Order Notes (optional)</label>
+                  <textarea id="notes" placeholder="Any special instructions or eco-friendly packaging requests?"></textarea>
+                </div>
+
+                <!-- Stripe Card Element -->
+                <div class="form-section" style="margin-bottom:var(--spacing-md);">
+                  <h3>Payment Details</h3>
+                  <div class="form-group">
+                    <label for="card-element">Credit or Debit Card</label>
+                    <div id="card-element" style="padding:0.75rem 1rem;border:2px solid var(--color-light-gray);border-radius:var(--radius-md);background:var(--color-background);">
+                      <!-- Stripe Elements mounts here -->
+                    </div>
+                    <div id="card-errors" style="color:var(--color-sale-red);font-size:0.85rem;margin-top:var(--spacing-xs);display:none;"></div>
+                  </div>
+                  <p style="font-size:0.8rem;color:var(--color-dark-gray);margin-top:var(--spacing-sm);">
+                    🔒 Test mode — use card number 4242 4242 4242 4242 with any future date and CVC
+                  </p>
+                </div>
+
+                <button type="submit" class="btn btn-accent btn-lg" style="width:100%;">
+                  Pay ${formatPrice(total)} — Place Order
+                </button>
+                <p style="font-size:0.8rem;color:var(--color-dark-gray);text-align:center;margin-top:var(--spacing-sm);">
+                  🔒 Secured with Stripe. Your payment info is encrypted and never stored on our servers.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <div>
+            <div class="cart-summary">
+              <h3>Order Summary</h3>
+              ${items.map(item => `
+                <div class="summary-row">
+                  <span>${item.product.name} × ${item.quantity}</span>
+                  <span>${formatPrice(item.product.price * item.quantity)}</span>
+                </div>
+              `).join('')}
+              <div class="summary-row" style="margin-top:var(--spacing-md);padding-top:var(--spacing-md);border-top:1px solid var(--color-light-gray);">
+                <span>Subtotal</span>
+                <span>${formatPrice(subtotal)}</span>
+              </div>
+              <div class="summary-row">
+                <span>Shipping</span>
+                <span>${shipping === 0 ? '<span class="free">FREE</span>' : formatPrice(shipping)}</span>
+              </div>
+              <div class="summary-row total">
+                <span>Total</span>
+                <span>${formatPrice(total)}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    // Track begin_checkout
+    if (typeof Analytics !== 'undefined') {
+      Analytics.trackBeginCheckout(items, subtotal);
+    }
+
+    // Initialize Stripe Elements
+    if (typeof StripeCheckout !== 'undefined') {
+      StripeCheckout.init();
+    }
+
+    async function handleCheckout(e) {
+      e.preventDefault();
+      
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Processing payment...';
+      submitBtn.disabled = true;
+
+      const orderId = 'EV-' + Date.now().toString(36).toUpperCase();
+      const subtotal = Cart.getSubtotal();
+      const formData = {
+        id: orderId,
+        name: document.getElementById('fullname').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        address: document.getElementById('address').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zip: document.getElementById('zip').value,
+        country: document.getElementById('country').value,
+        notes: document.getElementById('notes').value,
+        items: Cart.getDetailedCart(),
+        subtotal: subtotal,
+        total: subtotal + (subtotal >= 50 ? 0 : 5.99),
+        orderDate: new Date().toISOString()
+      };
+
+      // Process Stripe payment
+      let paymentResult = { success: true, testMode: true };
+      if (typeof StripeCheckout !== 'undefined' && StripeCheckout.stripe) {
+        paymentResult = await StripeCheckout.processPayment(formData);
+      }
+
+      if (!paymentResult.success) {
+        // Show payment error
+        const errorEl = document.getElementById('card-errors');
+        if (errorEl) {
+          errorEl.textContent = paymentResult.error;
+          errorEl.style.display = 'block';
+        }
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+        return;
+      }
+
+      // Attach payment info to order
+      if (paymentResult.cardLast4) {
+        formData.paymentMethod = paymentResult.paymentMethodId || 'test_payment';
+        formData.cardLast4 = paymentResult.cardLast4;
+        formData.cardBrand = paymentResult.cardBrand;
+      }
+
+      submitBtn.textContent = 'Placing order...';
+
+      // Submit order via OrderProcessor
+      const result = await OrderProcessor.submitOrder(formData);
+
+      // Track purchase event
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackPurchase(formData);
+      }
+
+      // Clear cart
+      Cart.clear();
+
+      // Show success
+      const container = document.getElementById('checkout-container');
+      container.innerHTML = `
+        <div class="cart-empty" style="max-width:600px;margin:0 auto;">
+          <div style="font-size:4rem;margin-bottom:var(--spacing-md);">🎉</div>
+          <h2>Order Placed Successfully!</h2>
+          <p style="font-size:1.1rem;">Thank you for your order, ${formData.name}!</p>
+          <p style="background:var(--color-tertiary);padding:var(--spacing-md);border-radius:var(--radius-md);margin:var(--spacing-lg) 0;">
+            <strong>Order ID:</strong> ${orderId}<br>
+            <strong>Total:</strong> ${formatPrice(formData.total)}<br>
+            ${formData.cardBrand ? `<strong>Payment:</strong> ${formData.cardBrand} ending in ${formData.cardLast4}<br>` : ''}
+            <strong>Confirmation sent to:</strong> ${formData.email}
+          </p>
+          ${!result.success ? `<p style="color:var(--color-warning);font-size:0.9rem;">⚠️ Order saved locally. Configure email notifications in config/forms.json</p>` : ''}
+          <p style="color:var(--color-dark-gray);font-size:0.9rem;">
+            ✅ Payment processed in test mode — no real charges were made. Thank you for shopping with EcoVault!
+          </p>
+          <a href="products.html" class="btn btn-primary btn-lg" style="margin-top:var(--spacing-md);">Continue Shopping</a>
+        </div>
+      `;
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
