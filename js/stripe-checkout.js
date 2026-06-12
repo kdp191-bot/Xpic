@@ -13,7 +13,7 @@
 
 const StripeCheckout = {
   // Test mode publishable key (safe to expose in client-side code)
-  publishableKey: 'pk_test_51OcExamplePublishableKeyHere',
+  publishableKey: 'pk_test_51TguJdFNpxltvF0Ta2IkbCXcnGaWB8YNTXraKWrpcFrYMjkcIVDYZwYCoybwgWcXr2uA56Fk3NNUlrEzvtnU86gY005vAuC9uI',
   
   // URL for the PaymentIntent API endpoint (update when deployed)
   paymentIntentEndpoint: '/api/create-payment-intent',
